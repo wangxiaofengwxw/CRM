@@ -28,11 +28,11 @@ public class UserController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public EasyUIDataGrideResult findAll(Integer page, Integer rows, User user) throws UnsupportedEncodingException {//这些数据都是EasyUI封装好的
-		System.err.println("+++++++++++"+user.getUserName());
-		if(user.getUserName() != null) {
-			String name = java.net.URLDecoder.decode(user.getUserName(),"UTF-8");
+		System.err.println("+++++++++++"+user.getName());
+		if(user.getName() != null) {
+			String name = java.net.URLDecoder.decode(user.getName(),"UTF-8");
 			System.out.println(name);
-			user.setUserName(name);
+			user.setName(name);
 		}
 		return userService.findAll(page, rows, user);
 	}

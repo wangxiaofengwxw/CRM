@@ -30,8 +30,8 @@ public class UserServiceImpl implements IUserService {
 		//判断是否有条件，如果有，添加。
 		//并且加了分页
 		Criteria createCriteria = userExample.createCriteria();
-		if (StringUtils.isNotEmpty(user.getUserName())) {
-			createCriteria.andUserNameLike(Util.formatLike(user.getUserName()));
+		if (StringUtils.isNotEmpty(user.getName())) {
+			createCriteria.andNameLike(Util.formatLike(user.getName()));
 		}
 		
 		List<User> userList = userMapper.selectByExample(userExample);
