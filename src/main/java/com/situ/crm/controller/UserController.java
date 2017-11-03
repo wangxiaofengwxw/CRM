@@ -1,6 +1,7 @@
 package com.situ.crm.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import com.situ.crm.common.EasyUIDataGrideResult;
 import com.situ.crm.common.ServerResponse;
 import com.situ.crm.pojo.User;
 import com.situ.crm.service.IUserService;
-import com.situ.crm.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -28,12 +28,6 @@ public class UserController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public EasyUIDataGrideResult findAll(Integer page, Integer rows, User user) throws UnsupportedEncodingException {//这些数据都是EasyUI封装好的
-		System.err.println("+++++++++++"+user.getName());
-		if(user.getName() != null) {
-			String name = java.net.URLDecoder.decode(user.getName(),"UTF-8");
-			System.out.println(name);
-			user.setName(name);
-		}
 		return userService.findAll(page, rows, user);
 	}
 	
@@ -53,6 +47,12 @@ public class UserController {
 	@ResponseBody
 	public ServerResponse update(User user) {
 		return userService.update(user);
+	}
+	
+	@RequestMapping("/findAssignMan")
+	@ResponseBody
+	public List<User> findAssignMan() {
+		return userService.findAssignMan();
 	}
 	
 }

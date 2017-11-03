@@ -1,5 +1,6 @@
 package com.situ.crm.dao;
 
+import com.situ.crm.pojo.DataDic;
 import com.situ.crm.pojo.SaleChance;
 import com.situ.crm.pojo.SaleChanceExample;
 import java.util.List;
@@ -93,4 +94,7 @@ public interface SaleChanceMapper {
      * @mbggenerated Mon Oct 30 14:03:59 CST 2017
      */
     int updateByPrimaryKey(SaleChance record);
+
+
+	List<SaleChance> findStatus();
 }

@@ -7,11 +7,60 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+
+	$(function(){//别忘了写这个
+		/*展示数据的datagrid表格*/
+		//这样写就不用在标签里加class，
+		$("#datagrid").datagrid({
+			url:'${ctx}/user/findAll.action',
+			method:'get',
+			fit:true,
+			singleSelect:false,
+			toolbar:'#toolbar',
+			rownumbers:true,
+			fitColumns:true,
+			pagination:true,
+			columns:[[    
+			     {field:'cb',checkbox:true,align:'center'},    
+			     {field:'id',title:'编号',width:80,align:'center'},    
+			     {field:'name',title:'用户名',width:100,align:'center'},    
+			     {field:'password',title:'密码',width:80,align:'center'},    
+			     {field:'trueName',title:'真实姓名',width:80,align:'center'},    
+			     {field:'email',title:'邮件',width:100,align:'center'},    
+			     {field:'phone',title:'联系电话',width:100,align:'center'},    
+			     {field:'roleName',title:'角色',width:100,align:'center'}    
+			]]  
+		});
+		
+		/*添加和修改弹出的dialog */
+		$("#dialog").dialog({
+			closed:'true',
+			buttons:[
+				{
+					text:'保存',
+					iconCls:'icon-ok',
+					handler:function(){
+						doSave();
+					}
+				},
+				{
+					text:'关闭',
+					iconCls:'icon-cancel',
+					handler:function(){
+						$("#dialog").dialog("close");
+					}
+				}
+				
+			]
+			
+		});
+	});
+
 	/* 查找 */
-	function doSearch(value){
-		alert(value);
+	function doSearch(){
 		$("#datagrid").datagrid("load",{
-			'name':value
+			'name':$("#name").val(),
+			'trueName':$("#trueName").val()
 		})
 	}
 	/* 删除 */
@@ -94,23 +143,8 @@
 </head>
 <body>
    
-    <!--  主体开始 -->
-	<table id="datagrid" class="easyui-datagrid" title="DataGrid with Toolbar"rownumbers="true" fitColumns="true"
-		pagination="true"
-		data-options="rownumbers:true,fit:true,singleSelect:false,url:'${ctx}/user/findAll.action',method:'post',toolbar:'#toolbar'">
-		<thead>
-			<tr>
-				<th data-options="field:'cb',checkbox:true,align:'center'"></th>
-				<th data-options="field:'id',width:80,align:'center'">编号</th>
-				<th data-options="field:'name',width:100,align:'center'">用户名</th>
-				<th data-options="field:'password',width:80,align:'center'">密码</th>
-				<th data-options="field:'trueName',width:80,align:'center'">真实姓名</th>
-				<th data-options="field:'email',width:100,align:'center'">邮件</th>
-				<th data-options="field:'phone',width:100,align:'center'">联系电话</th>
-				<th data-options="field:'roleName',width:100,align:'center'">角色</th>
-			</tr>
-		</thead>
-	</table>
+    <!--  主体开始 写到js里面 -->
+	<table id="datagrid" ></table>
 	<!--  主体结束 -->
 	
 	<!-- toolbar 开始-->
@@ -119,13 +153,14 @@
 		<a class="easyui-linkbutton" iconCls="icon-edit" href="javascript:openUpdateDialog()">修改</a>
 		<a class="easyui-linkbutton" iconCls="icon-remove" href="javascript:doDelete()">删除</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		<input class="easyui-searchbox" data-options="prompt:'用户名',searcher:doSearch" style="width:150px"></input>
+		<input id="name" class="easyui-textbox"  data-options="prompt:'用户名'" style="width:150px"></input>
+		<input id="trueName"  class="easyui-textbox"  data-options="prompt:'真实姓名'" style="width:150px"></input>
+		<a class="easyui-linkbutton" iconCls="icon-search" href="javascript:doSearch()"></a>
 	</div>
 	<!-- toolbar 结束-->
 
 	<!-- 添加和修改共用的窗口开始 -->
-	<div id="dialog" class="easyui-dialog" closed="true"
-		style="width:650;height:280,padding: 10px 20px" buttons="#dialog-button">
+	<div id="dialog" style="width:650;height:280,padding: 10px 20px" >
 		<form action="" id="form" method="post">
 			<input type="hidden" id="id" name="id"/>
 			<table cellspacing="8px">
@@ -149,7 +184,7 @@
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>用户角色：</td>
 					<td>
-						<select class="easyui-combobox" id="roleName" name="roleName" style="width:160">
+						<select class="easyui-combobox" id="roleName" name="roleName" editable="false"style="width:160">
 							<option></option>
 							<option value="系统管理员">系统管理员</option>
 							<option value="销售主管">销售主管</option>
@@ -162,12 +197,7 @@
 	</div>
 	<!-- 添加和修改共用的窗口结束 -->
 	
-	<!-- 保存和关闭按钮开始 -->
-	<div id="dialog-button" class="">
-		<a href="javascript:doSave()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
-		<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
-	</div>
-	<!-- 保存和关闭按钮结束 -->
+	
 
 </body>
 </html>

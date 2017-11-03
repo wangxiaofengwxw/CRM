@@ -1,4 +1,4 @@
-package com.situ.crm.pojo;
+ package com.situ.crm.pojo;
 
 import java.util.ArrayList;
 import java.util.List;

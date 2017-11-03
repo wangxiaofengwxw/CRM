@@ -21,16 +21,30 @@
 			});
 		}
 	}
+	function logout() {
+		$.messager.confirm('退出', '是否退出?', function(r){
+			if (r){
+				alert('confirmed: '+r);
+				window.location.href='${ctx}/admin/logout.action';
+			}
+		});
+	}
 </script>
 </head>
 <body class="easyui-layout">
 	<div region="north" style="height: 78px; background-color: #E0ECFF">
 		<table style="padding: 5px" width="100%">
 			<tr>
-				<td width="50%"><img alt="logo"
-					src="${pageContext.request.contextPath}/images/bglogo.png"></td>
-				<td valign="bottom" align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${currentUser.userName }</font>【${currentUser.trueName }】【${currentUser.roleName }】
-				</td>
+				<td><span>客户管理系统</span></td>
+				<%-- <td width="50%"><img alt="logo"
+					src="${pageContext.request.contextPath}/images/bglogo.png"></td> --%>
+				<c:if test="${admin == null }">
+					<td><a href="${ctx }/admin/login.action">登录</a></td>
+				</c:if>	
+				<c:if test="${admin != null }">
+					<td valign="bottom" align="right" width="50%"><font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${admin.name }</font>【${admin.trueName }】【${admin.roleName }】
+					</td>
+				</c:if>
 			</tr>
 		</table>
 	</div>
@@ -48,11 +62,11 @@
 			<div title="营销管理" data-options="selected:true,iconCls:'icon-yxgl'"
 				style="padding: 10px">
 				<a
-					href="javascript:openTab('营销机会管理','saleChanceManage.jsp','icon-yxjhgl')"
+					href="javascript:openTab('营销机会管理','${ctx}/saleChance/index.action','icon-yxjhgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-yxjhgl'"
 					style="width: 150px">营销机会管理</a> <a
-					href="javascript:openTab('客户开发计划','cusdevplanManage.jsp','icon-khkfjh')"
+					href="javascript:openTab('客户开发计划','${ctx }/saleChance/cusDevPlan.action','icon-khkfjh')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-khkfjh'"
 					style="width: 150px">客户开发计划</a>
@@ -60,11 +74,11 @@
 			<div title="客户管理" data-options="iconCls:'icon-khgl'"
 				style="padding: 10px;">
 				<a
-					href="javascript:openTab('客户信息管理','customerManage.jsp','icon-khxxgl')"
+					href="javascript:openTab('客户信息管理','${ctx }/customer/index.action','icon-khxxgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-khxxgl'"
 					style="width: 150px;">客户信息管理</a> <a
-					href="javascript:openTab('客户流失管理','customerLossManage.jsp','icon-khlsgl')"
+					href="javascript:openTab('客户流失管理','${ctx }/customerLoss/index.action','icon-khlsgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-khlsgl'"
 					style="width: 150px;">客户流失管理</a>
@@ -72,11 +86,11 @@
 			<div title="服务管理" data-options="iconCls:'icon-fwgl'"
 				style="padding: 10px">
 				<a
-					href="javascript:openTab('服务创建','customerServiceCreate.jsp','icon-fwcj')"
+					href="javascript:openTab('服务创建','${ctx }/service/add.action','icon-fwcj')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-fwcj'" style="width: 150px;">服务创建</a>
 				<a
-					href="javascript:openTab('服务分配','customerServiceAssign.jsp','icon-fwfp')"
+					href="javascript:openTab('服务分配','${ctx }/service/allot.action','icon-fwfp')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-fwfp'" style="width: 150px;">服务分配</a>
 				<a
@@ -114,11 +128,11 @@
 			<div title="基础数据管理" data-options="iconCls:'icon-jcsjgl'"
 				style="padding: 10px">
 				<a
-					href="javascript:openTab('数据字典管理','dataDicManage.jsp','icon-sjzdgl')"
+					href="javascript:openTab('数据字典管理','${ctx}/dataDic/index.action','icon-sjzdgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-sjzdgl'"
 					style="width: 150px;">数据字典管理</a> <a
-					href="javascript:openTab('产品信息查询','productSearch.jsp','icon-cpxxgl')"
+					href="javascript:openTab('产品信息查询','${ctx}/product/index.action','icon-cpxxgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-cpxxgl'"
 					style="width: 150px;">产品信息查询</a> 
@@ -128,11 +142,16 @@
 			</div>
 			<div title="系统管理" data-options="iconCls:'icon-item'"
 				style="padding: 10px">
-				<a href="javascript:openPasswordModifyDialog()"
+				<%-- <a href="${ctx}/admin/updatePassword.action"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-modifyPassword'"
-					style="width: 150px;">修改密码</a> <a href="javascript:logout()"
+					style="width: 150px;">修改密码</a> --%> 
+					<a
+					href="javascript:openTab('修改密码','${ctx}/admin/updatePassword.action','icon-sjzdgl')"
 					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-sjzdgl'"
+					style="width: 150px;">修改密码</a> 
+					<a href="javascript:logout()"class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
 			</div>
 		</div>
@@ -140,6 +159,6 @@
 	<div region="south" style="height: 25px; padding: 5px" align="center">
 		Java1707CRM管理系统
 	</div>
-
+	
 </body>
 </html>

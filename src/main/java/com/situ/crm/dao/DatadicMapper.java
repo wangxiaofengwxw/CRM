@@ -93,4 +93,15 @@ public interface DataDicMapper {
      * @mbggenerated Mon Oct 30 14:03:59 CST 2017
      */
     int updateByPrimaryKey(DataDic record);
+
+    /**
+     * 返回数据字典名，去除重复部分
+     * @return
+     */
+	List<DataDic> findDataDicName();
+	/**
+	 * 返回所有服务类型
+	 * @return
+	 */
+	List<DataDic> findService();
 }

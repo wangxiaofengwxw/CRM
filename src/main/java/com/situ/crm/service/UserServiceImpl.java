@@ -29,11 +29,14 @@ public class UserServiceImpl implements IUserService {
 		PageHelper.startPage(page, rows);
 		//判断是否有条件，如果有，添加。
 		//并且加了分页
+		//有几个条件就加几个判断
 		Criteria createCriteria = userExample.createCriteria();
 		if (StringUtils.isNotEmpty(user.getName())) {
 			createCriteria.andNameLike(Util.formatLike(user.getName()));
 		}
-		
+		if (StringUtils.isNotEmpty(user.getTrueName())) {
+			createCriteria.andTrueNameLike(Util.formatLike(user.getTrueName ()));
+		}
 		List<User> userList = userMapper.selectByExample(userExample);
 		//total
 		PageInfo<User> pageInfo = new PageInfo<>(userList);
@@ -67,6 +70,14 @@ public class UserServiceImpl implements IUserService {
 			return ServerResponse.createSuccess("修改成功");
 		}
 		return ServerResponse.createError("修改失败");
+	}
+
+	@Override
+	public List<User> findAssignMan() {
+		UserExample userExample = new UserExample();
+		Criteria createCriteria = userExample.createCriteria();
+		createCriteria.andRoleNameLike(Util.formatLike("客户经理"));
+		return userMapper.selectByExample(userExample);
 	}
 	
 }

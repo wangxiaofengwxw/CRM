@@ -425,4 +425,9 @@
       dev_result = #{devResult,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findStatus" resultMap="BaseResultMap">
+  	select distinct status from sale_chance
+  </select>
+  
 </mapper>

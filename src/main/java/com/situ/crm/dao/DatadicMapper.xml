@@ -253,4 +253,13 @@
       data_dic_value = #{dataDicValue,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findDataDicName" resultMap="BaseResultMap">
+  	select distinct data_dic_name from data_dic
+  </select>
+  
+  <select id="findService" resultMap="BaseResultMap">
+  	SELECT * FROM data_dic WHERE data_dic_name = '服务类型';
+  </select>
+  
 </mapper>

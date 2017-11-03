@@ -93,4 +93,8 @@ public interface CustomerOrderMapper {
      * @mbggenerated Mon Oct 30 14:03:59 CST 2017
      */
     int updateByPrimaryKey(CustomerOrder record);
+
+	CustomerOrder findLastOrderByCustomerId(Integer id);
+
+
 }
