@@ -2,7 +2,11 @@ package com.situ.crm.dao;
 
 import com.situ.crm.pojo.Customer;
 import com.situ.crm.pojo.CustomerExample;
+import com.situ.crm.vo.CustomerConstitute;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CustomerMapper {
@@ -96,5 +100,18 @@ public interface CustomerMapper {
 	List<Customer> findLossCustomer();
 
 	int updateByPrimaryKey(Customer customer);
+
+	/**
+	 * 查找每个等级客户的数量
+	 * @return
+	 */
+	List<CustomerConstitute> findCustomerConstitute();
+
+	/**
+	 * 返回客户贡献对象
+	 * @param map
+	 * @return
+	 */
+	List<CustomerConstitute> findCustomerContribute(Map<String, Object> map);
 
 }

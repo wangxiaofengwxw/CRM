@@ -139,6 +139,12 @@
 			}
 		})
 	}
+		 
+
+	/* //上传Excel表格
+	function uploadExcel() {
+		location.href="${ctx}/saleChance/inputExcel.action"
+	} */
 </script>
 </head>
 <body>
@@ -152,6 +158,10 @@
 		<a class="easyui-linkbutton" iconCls="icon-add" href="javascript:openAddDialog()">添加</a>
 		<a class="easyui-linkbutton" iconCls="icon-edit" href="javascript:openUpdateDialog()">修改</a>
 		<a class="easyui-linkbutton" iconCls="icon-remove" href="javascript:doDelete()">删除</a>
+		<form name="serForm" action="${ctx}/saleChance/inputExcel.action" method="post"  enctype="multipart/form-data">
+			<input type="file" name="file" id="file"/>
+			<input type="submit" value="导入"/>
+		</form>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input id="name" class="easyui-textbox"  data-options="prompt:'用户名'" style="width:150px"></input>
 		<input id="trueName"  class="easyui-textbox"  data-options="prompt:'真实姓名'" style="width:150px"></input>

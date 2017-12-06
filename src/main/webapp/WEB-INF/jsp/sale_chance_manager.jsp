@@ -185,6 +185,8 @@
 	        }
 	    });
 	 }); 
+	
+	
 
 </script>
 </head>
@@ -199,6 +201,7 @@
 		<a class="easyui-linkbutton" iconCls="icon-add" href="javascript:openAddDialog()">添加</a>
 		<a class="easyui-linkbutton" iconCls="icon-edit" href="javascript:openUpdateDialog()">修改</a>
 		<a class="easyui-linkbutton" iconCls="icon-remove" href="javascript:doDelete()">删除</a>
+		<a class="easyui-linkbutton" iconCls="icon-remove" href="${ctx }/saleChance/exportExcel.action">导出表格</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input id="customerName" class="easyui-textbox"  data-options="prompt:'客户名称'" style="width:150px"></input>
 		<input id="overview"  class="easyui-textbox"  data-options="prompt:'概要'" style="width:150px"></input>

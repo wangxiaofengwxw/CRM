@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<div id="p" class="easyui-panel" title="销售机会信息" style="width: 600px;height: 350px">
+	<div id="p" class="easyui-panel" title="服务信息" style="width: 600px;height: 350px">
 		<form action="" id="form">
 		 	<table cellspacing="8px">
 		   		<tr>

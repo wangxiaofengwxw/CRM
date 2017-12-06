@@ -93,4 +93,6 @@ public interface CustomerServiceMapper {
      * @mbggenerated Mon Oct 30 14:03:59 CST 2017
      */
     int updateByPrimaryKey(CustomerService record);
+
+	List<com.situ.crm.vo.CustomerService> findCustomerService();
 }

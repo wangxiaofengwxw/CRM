@@ -23,6 +23,11 @@ public class ServiceController {
 		return "service_add";
 	}
 	
+	@RequestMapping("/manage")
+	public String manage() {
+		return "service_manage";
+	}
+	
 	@RequestMapping("/allot")
 	public String allot() {
 		return "service_allot";
